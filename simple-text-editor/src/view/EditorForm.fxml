@@ -62,7 +62,7 @@
                   <SeparatorMenuItem mnemonicParsing="false" />
                   <MenuItem mnemonicParsing="false" onAction="#mnuItemFind_OnAction" text="Find">
                      <accelerator>
-                        <KeyCodeCombination alt="UP" code="F3" control="UP" meta="UP" shift="UP" shortcut="ANY" />
+                        <KeyCodeCombination alt="UP" code="F" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
                      </accelerator>
                   </MenuItem>
                   <MenuItem mnemonicParsing="false" onAction="#mnuItemReplace_OnAction" text="Replace">
