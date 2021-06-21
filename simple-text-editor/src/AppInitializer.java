@@ -17,7 +17,7 @@ public class AppInitializer extends Application {
         AnchorPane root = FXMLLoader.load(this.getClass().getResource("/view/EditorForm.fxml"));
         Scene mainScene = new Scene(root);
         primaryStage.setScene(mainScene);
-        primaryStage.setTitle("Simple Text Editor");
+        primaryStage.setTitle("Text Editor");
         primaryStage.setMaximized(true);
         primaryStage.show();
     }

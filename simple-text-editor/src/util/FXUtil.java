@@ -42,7 +42,6 @@ public class FXUtil {
             } catch (NoSuchFieldException | IllegalAccessException e) {
                 e.printStackTrace();
             } catch (Exception e) {
-                // Nothing to do here 😉
             }
 
         });

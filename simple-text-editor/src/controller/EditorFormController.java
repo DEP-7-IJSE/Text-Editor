@@ -22,7 +22,7 @@ public class EditorFormController {
     public AnchorPane pneFind;
     public TextField txtSearch;
     public AnchorPane pneReplace;
-    public TextField txtSearch1;        // This is inside the pneReplace
+    public TextField txtSearch1;
     public TextField txtReplace;
     private int findOffset = -1;
 
@@ -116,19 +116,6 @@ public class EditorFormController {
     }
 
     public void btnReplaceAll_OnAction(ActionEvent actionEvent) {
-/*        try {
-            String replacedText = Pattern.compile(txtSearch1.getText()).matcher(txtEditor.getText()).replaceAll(txtReplace.getText());
-            txtEditor.setText(replacedText);
-        }catch (PatternSyntaxException e){
-            // There is nothing to do here
-        }
-
-        for (int i = 0; i< searchList.size(); i++) {
-            txtEditor.replaceText(searchList.get(i).startingIndex, searchList.get(i).endIndex, txtReplace.getText());
-            searchMatches(txtSearch1.getText());
-            i=-1;
-        }*/
-
         while (!searchList.isEmpty()) {
             txtEditor.replaceText(searchList.get(0).startingIndex, searchList.get(0).endIndex, txtReplace.getText());
             searchMatches(txtSearch1.getText());
