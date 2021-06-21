@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/Data Validation/Data Validation.iml" filepath="$PROJECT_DIR$/Data Validation/Data Validation.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Regular Expressions/Regular Expressions.iml" filepath="$PROJECT_DIR$/Regular Expressions/Regular Expressions.iml" />
+      <module fileurl="file://$PROJECT_DIR$/simple-text-editor/simple-text-editor.iml" filepath="$PROJECT_DIR$/simple-text-editor/simple-text-editor.iml" />
+    </modules>
+  </component>
+</project>

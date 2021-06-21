@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="400.0" prefWidth="459.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MainFormController">
+   <children>
+      <Label layoutX="108.0" layoutY="29.0" text="Data Validation Demo">
+         <font>
+            <Font size="22.0" />
+         </font>
+      </Label>
+      <TextField fx:id="txtIntegersOnly" layoutX="24.0" layoutY="74.0" prefHeight="26.0" prefWidth="313.0" promptText="Integers Only" AnchorPane.leftAnchor="24.0" />
+      <Button layoutX="350.0" layoutY="74.0" mnemonicParsing="false" onAction="#btnValidateIntegersOnly_OnAction" prefHeight="26.0" prefWidth="85.0" text="Validate" />
+      <TextField fx:id="txtNumbersOnly" layoutX="24.0" layoutY="116.0" prefHeight="26.0" prefWidth="313.0" promptText="Positive, Negative, Floating Points" />
+      <Button layoutX="350.0" layoutY="116.0" mnemonicParsing="false" onAction="#btnValidateNumbersOnly_OnAction" prefHeight="26.0" prefWidth="85.0" text="Validate" />
+      <TextField fx:id="txtNIC" layoutX="24.0" layoutY="158.0" prefHeight="26.0" prefWidth="313.0" promptText="Valid NIC" />
+      <Button layoutX="350.0" layoutY="158.0" mnemonicParsing="false" onAction="#btnValidateNIC_OnAction" prefHeight="26.0" prefWidth="85.0" text="Validate" />
+   </children>
+</AnchorPane>
