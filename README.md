@@ -1,7 +1,5 @@
 # Text Editor
 
----
----
 
 ### Contents of this file
 * Introduction

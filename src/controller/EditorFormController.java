@@ -7,9 +7,11 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
+import javafx.stage.FileChooser;
 import javafx.util.Duration;
 import util.FXUtil;
 
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -128,6 +130,31 @@ public class EditorFormController {
         searchMatches(txtSearch1.getText());
     }
 
+    public void mnuFileOpen_OnAction(ActionEvent actionEvent) {
+        FileChooser fileChooser= new FileChooser();
+        fileChooser.setTitle("Open File");
+        fileChooser.getExtensionFilters().add(
+                new FileChooser.ExtensionFilter("All Text Files", "*.txt", "*.html"));
+        fileChooser.getExtensionFilters().add(
+                new FileChooser.ExtensionFilter("All Files","*")
+        );
+        File file = fileChooser.showOpenDialog(txtEditor.getScene().getWindow());
+
+        if(file == null) return;
+
+        txtEditor.clear();
+
+        try(FileReader fileReader= new FileReader(file);
+            BufferedReader bufferedReader= new BufferedReader(fileReader)){
+            String line;
+
+            while ((line = bufferedReader.readLine()) != null){
+                txtEditor.appendText(line + '\n');
+            }
+        }catch (IOException e){
+            e.printStackTrace();
+        }
+    }
 }
 
 class Index {
