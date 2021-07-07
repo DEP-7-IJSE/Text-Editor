@@ -3,6 +3,8 @@ package controller;
 import javafx.animation.FadeTransition;
 import javafx.beans.value.ChangeListener;
 import javafx.event.ActionEvent;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
@@ -72,10 +74,10 @@ public class EditorFormController {
 
     public void mnuItemFind_OnAction(ActionEvent actionEvent) {
         findOffset = -1;
-        if (pneReplace.getOpacity()==1) {
+        if (pneReplace.getOpacity() == 1) {
             pneReplace.setOpacity(0);
         }
-        FadeTransition fadeTransition= new FadeTransition(Duration.millis(250),pneFind);
+        FadeTransition fadeTransition = new FadeTransition(Duration.millis(250), pneFind);
         fadeTransition.setFromValue(0);
         fadeTransition.setToValue(1);
         fadeTransition.play();
@@ -84,10 +86,10 @@ public class EditorFormController {
 
     public void mnuItemReplace_OnAction(ActionEvent actionEvent) {
         findOffset = -1;
-        if (pneFind.getOpacity()==1) {
+        if (pneFind.getOpacity() == 1) {
             pneFind.setOpacity(0);
         }
-        FadeTransition fadeTransition= new FadeTransition(Duration.millis(250),pneReplace);
+        FadeTransition fadeTransition = new FadeTransition(Duration.millis(250), pneReplace);
         fadeTransition.setFromValue(0);
         fadeTransition.setToValue(1);
         fadeTransition.play();
@@ -132,28 +134,28 @@ public class EditorFormController {
     }
 
     public void mnuFileOpen_OnAction(ActionEvent actionEvent) {
-        FileChooser fileChooser= new FileChooser();
+        FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Open File");
         fileChooser.getExtensionFilters().add(
                 new FileChooser.ExtensionFilter("All Text Files", "*.txt", "*.html"));
         fileChooser.getExtensionFilters().add(
-                new FileChooser.ExtensionFilter("All Files","*")
+                new FileChooser.ExtensionFilter("All Files", "*")
         );
         File file = fileChooser.showOpenDialog(txtEditor.getScene().getWindow());
 
-        if(file == null) return;
+        if (file == null) return;
 
         txtEditor.clear();
 
-        try(FileReader fileReader= new FileReader(file);
-            BufferedReader bufferedReader= new BufferedReader(fileReader)){
+        try (FileReader fileReader = new FileReader(file);
+             BufferedReader bufferedReader = new BufferedReader(fileReader)) {
             String line;
 
-            while ((line = bufferedReader.readLine()) != null){
+            while ((line = bufferedReader.readLine()) != null) {
                 txtEditor.appendText(line + '\n');
             }
-        }catch (IOException e){
-            e.printStackTrace();
+        } catch (IOException e) {
+            new Alert(Alert.AlertType.ERROR,"Can't open the file", ButtonType.CLOSE).show();
         }
     }
 
@@ -161,6 +163,15 @@ public class EditorFormController {
     }
 
     public void mnuSaveAs_OnAction(ActionEvent actionEvent) {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Save File");
+        File file = fileChooser.showSaveDialog(txtEditor.getScene().getWindow());
+        try (FileWriter fileWriter = new FileWriter(file);
+             BufferedWriter bufferedWriter = new BufferedWriter(fileWriter)) {
+            bufferedWriter.write(txtEditor.getText());
+        } catch (IOException e) {
+            new Alert(Alert.AlertType.ERROR,"Can't save the file", ButtonType.CLOSE).show();
+        }
     }
 
     public void mnuPageSetup_OnAction(ActionEvent actionEvent) {
