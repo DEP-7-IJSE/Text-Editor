@@ -3,6 +3,7 @@ package controller;
 import javafx.animation.FadeTransition;
 import javafx.beans.value.ChangeListener;
 import javafx.event.ActionEvent;
+import javafx.print.PrinterJob;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextArea;
@@ -30,9 +31,12 @@ public class EditorFormController {
     public TextField txtReplace;
     private int findOffset = -1;
 
+    private PrinterJob printerJob;
+
     public void initialize() {
         pneFind.setOpacity(0);
         pneReplace.setOpacity(0);
+        this.printerJob = PrinterJob.createPrinterJob();
 
         ChangeListener textListener = (ChangeListener<String>) (observable, oldValue, newValue) -> {
             searchMatches(newValue);
@@ -155,7 +159,7 @@ public class EditorFormController {
                 txtEditor.appendText(line + '\n');
             }
         } catch (IOException e) {
-            new Alert(Alert.AlertType.ERROR,"Can't open the file", ButtonType.CLOSE).show();
+            new Alert(Alert.AlertType.ERROR, "Can't open the file", ButtonType.CLOSE).show();
         }
     }
 
@@ -170,15 +174,20 @@ public class EditorFormController {
              BufferedWriter bufferedWriter = new BufferedWriter(fileWriter)) {
             bufferedWriter.write(txtEditor.getText());
         } catch (IOException e) {
-            new Alert(Alert.AlertType.ERROR,"Can't save the file", ButtonType.CLOSE).show();
+            new Alert(Alert.AlertType.ERROR, "Can't save the file", ButtonType.CLOSE).show();
         }
     }
 
     public void mnuPageSetup_OnAction(ActionEvent actionEvent) {
+        printerJob.showPageSetupDialog(txtEditor.getScene().getWindow());
     }
 
     public void mnuPrint_OnAction(ActionEvent actionEvent) {
+        boolean printDialog = printerJob.showPrintDialog(txtEditor.getScene().getWindow());
 
+        if (printDialog) {
+            printerJob.printPage(txtEditor.lookup("Text"));
+        }
     }
 }
 
