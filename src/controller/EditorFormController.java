@@ -32,11 +32,13 @@ public class EditorFormController {
     private int findOffset = -1;
 
     private PrinterJob printerJob;
+    String text;
 
     public void initialize() {
         pneFind.setOpacity(0);
         pneReplace.setOpacity(0);
         this.printerJob = PrinterJob.createPrinterJob();
+        this.text = txtEditor.getText();
 
         ChangeListener textListener = (ChangeListener<String>) (observable, oldValue, newValue) -> {
             searchMatches(newValue);
@@ -164,12 +166,23 @@ public class EditorFormController {
     }
 
     public void mnuSave_OnAction(ActionEvent actionEvent) {
+        if (!text.equals(txtEditor.getText())){
+            text = txtEditor.getText();
+            saveFile();
+        }
     }
 
     public void mnuSaveAs_OnAction(ActionEvent actionEvent) {
+        saveFile();
+    }
+
+    private void saveFile(){
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Save File");
         File file = fileChooser.showSaveDialog(txtEditor.getScene().getWindow());
+
+        if(file == null) return;
+
         try (FileWriter fileWriter = new FileWriter(file);
              BufferedWriter bufferedWriter = new BufferedWriter(fileWriter)) {
             bufferedWriter.write(txtEditor.getText());
