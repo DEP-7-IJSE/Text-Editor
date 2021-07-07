@@ -1,8 +1,10 @@
 package controller;
 
 import javafx.animation.FadeTransition;
+import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.print.PrinterJob;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
@@ -11,12 +13,14 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
+import javafx.stage.WindowEvent;
 import javafx.util.Duration;
 import util.FXUtil;
 
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.regex.PatternSyntaxException;
@@ -29,10 +33,9 @@ public class EditorFormController {
     public AnchorPane pneReplace;
     public TextField txtSearch1;
     public TextField txtReplace;
-    private int findOffset = -1;
-
-    private PrinterJob printerJob;
     String text;
+    private int findOffset = -1;
+    private PrinterJob printerJob;
 
     public void initialize() {
         pneFind.setOpacity(0);
@@ -46,6 +49,30 @@ public class EditorFormController {
 
         txtSearch.textProperty().addListener(textListener);
         txtSearch1.textProperty().addListener(textListener);
+
+        Platform.runLater(() ->
+                txtEditor.getScene().getWindow().setOnCloseRequest(event -> {
+                    Properties properties = new Properties();
+
+                    double height = txtEditor.getScene().getWindow().getHeight();
+                    double width = txtEditor.getScene().getWindow().getWidth();
+                    double x = txtEditor.getScene().getWindow().getX();
+                    double y = txtEditor.getScene().getWindow().getY();
+
+                    properties.setProperty("width",String.valueOf(width));
+                    properties.setProperty("height",String.valueOf(height));
+                    properties.setProperty("x",String.valueOf(x));
+                    properties.setProperty("y",String.valueOf(y));
+
+                    File file = new File("textEditor.properties");
+                    try (FileWriter fileWriter = new FileWriter(file);
+                         BufferedWriter bufferedWriter = new BufferedWriter(fileWriter)) {
+                        properties.store(bufferedWriter, "Window Properties");
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                })
+        );
     }
 
     private void searchMatches(String query) {
@@ -166,7 +193,7 @@ public class EditorFormController {
     }
 
     public void mnuSave_OnAction(ActionEvent actionEvent) {
-        if (!text.equals(txtEditor.getText())){
+        if (!text.equals(txtEditor.getText())) {
             text = txtEditor.getText();
             saveFile();
         }
@@ -176,12 +203,12 @@ public class EditorFormController {
         saveFile();
     }
 
-    private void saveFile(){
+    private void saveFile() {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Save File");
         File file = fileChooser.showSaveDialog(txtEditor.getScene().getWindow());
 
-        if(file == null) return;
+        if (file == null) return;
 
         try (FileWriter fileWriter = new FileWriter(file);
              BufferedWriter bufferedWriter = new BufferedWriter(fileWriter)) {
