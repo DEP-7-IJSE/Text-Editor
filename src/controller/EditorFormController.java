@@ -67,6 +67,7 @@ public class EditorFormController {
     }
 
     public void mnuItemExit_OnAction(ActionEvent actionEvent) {
+        System.exit(0);
     }
 
     public void mnuItemFind_OnAction(ActionEvent actionEvent) {
@@ -154,6 +155,19 @@ public class EditorFormController {
         }catch (IOException e){
             e.printStackTrace();
         }
+    }
+
+    public void mnuSave_OnAction(ActionEvent actionEvent) {
+    }
+
+    public void mnuSaveAs_OnAction(ActionEvent actionEvent) {
+    }
+
+    public void mnuPageSetup_OnAction(ActionEvent actionEvent) {
+    }
+
+    public void mnuPrint_OnAction(ActionEvent actionEvent) {
+
     }
 }
 
