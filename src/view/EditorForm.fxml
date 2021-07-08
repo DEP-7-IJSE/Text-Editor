@@ -46,17 +46,17 @@
           </Menu>
           <Menu mnemonicParsing="false" text="Edit">
             <items>
-              <MenuItem mnemonicParsing="false" text="Cut">
+              <MenuItem mnemonicParsing="false" onAction="#mnuItemCut_OnAction" text="Cut">
                      <accelerator>
                         <KeyCodeCombination alt="UP" code="X" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
                      </accelerator>
                   </MenuItem>
-                  <MenuItem mnemonicParsing="false" text="Copy">
+                  <MenuItem mnemonicParsing="false" onAction="#mnuItemCopy_OnAction" text="Copy">
                      <accelerator>
                         <KeyCodeCombination alt="UP" code="C" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
                      </accelerator>
                   </MenuItem>
-                  <MenuItem mnemonicParsing="false" text="Paste">
+                  <MenuItem mnemonicParsing="false" onAction="#mnuItemPaste_OnAction" text="Paste">
                      <accelerator>
                         <KeyCodeCombination alt="UP" code="V" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
                      </accelerator>

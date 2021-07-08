@@ -4,7 +4,6 @@ import javafx.animation.FadeTransition;
 import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.print.PrinterJob;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
@@ -13,7 +12,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
-import javafx.stage.WindowEvent;
 import javafx.util.Duration;
 import util.FXUtil;
 
@@ -59,10 +57,10 @@ public class EditorFormController {
                     double x = txtEditor.getScene().getWindow().getX();
                     double y = txtEditor.getScene().getWindow().getY();
 
-                    properties.setProperty("width",String.valueOf(width));
-                    properties.setProperty("height",String.valueOf(height));
-                    properties.setProperty("x",String.valueOf(x));
-                    properties.setProperty("y",String.valueOf(y));
+                    properties.setProperty("width", String.valueOf(width));
+                    properties.setProperty("height", String.valueOf(height));
+                    properties.setProperty("x", String.valueOf(x));
+                    properties.setProperty("y", String.valueOf(y));
 
                     File file = new File("textEditor.properties");
                     try (FileWriter fileWriter = new FileWriter(file);
@@ -228,6 +226,18 @@ public class EditorFormController {
         if (printDialog) {
             printerJob.printPage(txtEditor.lookup("Text"));
         }
+    }
+
+    public void mnuItemCut_OnAction(ActionEvent actionEvent) {
+        txtEditor.cut();
+    }
+
+    public void mnuItemCopy_OnAction(ActionEvent actionEvent) {
+        txtEditor.copy();
+    }
+
+    public void mnuItemPaste_OnAction(ActionEvent actionEvent) {
+        txtEditor.paste();
     }
 }
 
