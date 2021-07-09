@@ -48,29 +48,6 @@ public class EditorFormController {
         txtSearch.textProperty().addListener(textListener);
         txtSearch1.textProperty().addListener(textListener);
 
-        Platform.runLater(() ->
-                txtEditor.getScene().getWindow().setOnCloseRequest(event -> {
-                    Properties properties = new Properties();
-
-                    double height = txtEditor.getScene().getWindow().getHeight();
-                    double width = txtEditor.getScene().getWindow().getWidth();
-                    double x = txtEditor.getScene().getWindow().getX();
-                    double y = txtEditor.getScene().getWindow().getY();
-
-                    properties.setProperty("width", String.valueOf(width));
-                    properties.setProperty("height", String.valueOf(height));
-                    properties.setProperty("x", String.valueOf(x));
-                    properties.setProperty("y", String.valueOf(y));
-
-                    File file = new File("textEditor.properties");
-                    try (FileWriter fileWriter = new FileWriter(file);
-                         BufferedWriter bufferedWriter = new BufferedWriter(fileWriter)) {
-                        properties.store(bufferedWriter, "Window Properties");
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                })
-        );
     }
 
     private void searchMatches(String query) {
@@ -89,7 +66,7 @@ public class EditorFormController {
             if (searchList.isEmpty()) {
                 findOffset = -1;
             }
-        } catch (PatternSyntaxException e) {
+        } catch (PatternSyntaxException ignored) {
 
         }
     }

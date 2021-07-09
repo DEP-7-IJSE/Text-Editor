@@ -21,24 +21,36 @@ public class AppInitializer extends Application {
 
         Properties properties= new Properties();
         File file = new File("textEditor.properties");
+
         if (file.exists()){
             try (FileReader fileReader = new FileReader(file);
                  BufferedReader bufferedReader = new BufferedReader(fileReader)) {
                 properties.load(bufferedReader);
 
-                String width = properties.getProperty("width");
-                String height = properties.getProperty("height");
-                String x = properties.getProperty("x");
-                String y = properties.getProperty("y");
-
-                primaryStage.setWidth(Double.parseDouble(width));
-                primaryStage.setHeight(Double.parseDouble(height));
-                primaryStage.setX(Double.parseDouble(x));
-                primaryStage.setY(Double.parseDouble(y));
+                primaryStage.setWidth(Double.parseDouble(properties.getProperty("width")));
+                primaryStage.setHeight(Double.parseDouble(properties.getProperty("height")));
+                primaryStage.setX(Double.parseDouble(properties.getProperty("x")));
+                primaryStage.setY(Double.parseDouble(properties.getProperty("y")));
+            } catch (NumberFormatException e){
+                primaryStage.setMaximized(true);
             }
         }else {
             primaryStage.setMaximized(true);
         }
+
+        primaryStage.setOnCloseRequest(event -> {
+            properties.setProperty("width", String.valueOf(primaryStage.getWidth()));
+            properties.setProperty("height", String.valueOf(primaryStage.getHeight()));
+            properties.setProperty("x", String.valueOf(primaryStage.getX()));
+            properties.setProperty("y", String.valueOf(primaryStage.getY()));
+
+            try (FileWriter fileWriter = new FileWriter(file);
+                 BufferedWriter bufferedWriter = new BufferedWriter(fileWriter)) {
+                properties.store(bufferedWriter, "Window Properties");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
 
         primaryStage.setTitle("Text Editor");
         primaryStage.show();
