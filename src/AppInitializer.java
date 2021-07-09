@@ -6,6 +6,7 @@ import javafx.stage.Stage;
 
 import java.io.*;
 import java.util.Properties;
+import java.util.prefs.Preferences;
 
 public class AppInitializer extends Application {
 
@@ -19,37 +20,25 @@ public class AppInitializer extends Application {
         Scene mainScene = new Scene(root);
         primaryStage.setScene(mainScene);
 
-        Properties properties= new Properties();
-        File file = new File("textEditor.properties");
+        double width = Preferences.userRoot().node("TextEditor-DEP7").getDouble("width", -1);
+        double height = Preferences.userRoot().node("TextEditor-DEP7").getDouble("height", -1);
+        double x = Preferences.userRoot().node("TextEditor-DEP7").getDouble("x", -1);
+        double y = Preferences.userRoot().node("TextEditor-DEP7").getDouble("y", -1);
 
-        if (file.exists()){
-            try (FileReader fileReader = new FileReader(file);
-                 BufferedReader bufferedReader = new BufferedReader(fileReader)) {
-                properties.load(bufferedReader);
-
-                primaryStage.setWidth(Double.parseDouble(properties.getProperty("width")));
-                primaryStage.setHeight(Double.parseDouble(properties.getProperty("height")));
-                primaryStage.setX(Double.parseDouble(properties.getProperty("x")));
-                primaryStage.setY(Double.parseDouble(properties.getProperty("y")));
-            } catch (NumberFormatException e){
-                primaryStage.setMaximized(true);
-            }
+        if (width != -1 && height !=-1 && x!=-1 && y!= -1){
+                primaryStage.setWidth(width);
+                primaryStage.setHeight(height);
+                primaryStage.setX(x);
+                primaryStage.setY(y);
         }else {
             primaryStage.setMaximized(true);
         }
 
         primaryStage.setOnCloseRequest(event -> {
-            properties.setProperty("width", String.valueOf(primaryStage.getWidth()));
-            properties.setProperty("height", String.valueOf(primaryStage.getHeight()));
-            properties.setProperty("x", String.valueOf(primaryStage.getX()));
-            properties.setProperty("y", String.valueOf(primaryStage.getY()));
-
-            try (FileWriter fileWriter = new FileWriter(file);
-                 BufferedWriter bufferedWriter = new BufferedWriter(fileWriter)) {
-                properties.store(bufferedWriter, "Window Properties");
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            Preferences.userRoot().node("TextEditor-DEP7").putDouble("width",primaryStage.getWidth());
+            Preferences.userRoot().node("TextEditor-DEP7").putDouble("height",primaryStage.getHeight());
+            Preferences.userRoot().node("TextEditor-DEP7").putDouble("x",primaryStage.getX());
+            Preferences.userRoot().node("TextEditor-DEP7").putDouble("y",primaryStage.getY());
         });
 
         primaryStage.setTitle("Text Editor");
