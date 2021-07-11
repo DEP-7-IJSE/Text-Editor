@@ -1,14 +1,10 @@
 package controller;
 
 import javafx.animation.FadeTransition;
-import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.event.ActionEvent;
 import javafx.print.PrinterJob;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
@@ -18,7 +14,8 @@ import util.FXUtil;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Properties;
+import java.util.NoSuchElementException;
+import java.util.prefs.Preferences;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.regex.PatternSyntaxException;
@@ -32,6 +29,7 @@ public class EditorFormController {
     public TextField txtSearch1;
     public TextField txtReplace;
     String text;
+    double font_size;
     private int findOffset = -1;
     private PrinterJob printerJob;
 
@@ -40,6 +38,9 @@ public class EditorFormController {
         pneReplace.setOpacity(0);
         this.printerJob = PrinterJob.createPrinterJob();
         this.text = txtEditor.getText();
+
+        font_size = Preferences.userRoot().node("TextEditor-DEP7").getDouble("font size", 18);
+        txtEditor.setStyle("-fx-font-size: " + font_size);
 
         ChangeListener textListener = (ChangeListener<String>) (observable, oldValue, newValue) -> {
             searchMatches(newValue);
@@ -215,6 +216,20 @@ public class EditorFormController {
 
     public void mnuItemPaste_OnAction(ActionEvent actionEvent) {
         txtEditor.paste();
+    }
+
+    public void mnuItemFontSize_OnAction(ActionEvent actionEvent) {
+        TextInputDialog textInputDialog = new TextInputDialog(String.valueOf(font_size));
+        textInputDialog.setHeaderText("Font Size");
+        try {
+            String fontSize = textInputDialog.showAndWait().get();
+            Preferences.userRoot().node("TextEditor-DEP7").putDouble("font size", Double.parseDouble(textInputDialog.getEditor().getText()));
+            txtEditor.setStyle("-fx-font-size: " + fontSize);
+        } catch (NumberFormatException e) {
+            new Alert(Alert.AlertType.ERROR, "Invalid size", ButtonType.CLOSE).show();
+        } catch (NoSuchElementException ignored) {
+
+        }
     }
 }
 
