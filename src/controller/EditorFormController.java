@@ -1,3 +1,8 @@
+/*
+ * Copyright (c) 2021 - present Pethum Jeewantha. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ */
+
 package controller;
 
 import javafx.animation.FadeTransition;
@@ -10,6 +15,8 @@ import javafx.scene.input.TransferMode;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import javafx.util.Duration;
 import util.FXUtil;
 
@@ -30,6 +37,7 @@ public class EditorFormController {
     public AnchorPane pneReplace;
     public TextField txtSearch1;
     public TextField txtReplace;
+    public Label lblWords;
     String text;
     double font_size;
     private int findOffset = -1;
@@ -41,6 +49,8 @@ public class EditorFormController {
         this.printerJob = PrinterJob.createPrinterJob();
         this.text = txtEditor.getText();
 
+        wordCount(txtEditor.getText());
+
         font_size = Preferences.userRoot().node("TextEditor-DEP7").getDouble("font size", 18);
         txtEditor.setStyle("-fx-font-size: " + font_size);
 
@@ -51,6 +61,18 @@ public class EditorFormController {
         txtSearch.textProperty().addListener(textListener);
         txtSearch1.textProperty().addListener(textListener);
 
+        txtEditor.textProperty().addListener((observable, oldValue, newValue) -> {
+            wordCount(newValue);
+        });
+
+    }
+
+    private void wordCount(String newValue) {
+        if (txtEditor.getText().trim().isEmpty()) lblWords.setText("0");
+        else {
+            String[] words = newValue.split("\\s+");
+            lblWords.setText(String.valueOf(words.length));
+        }
     }
 
     private void searchMatches(String query) {
@@ -226,7 +248,9 @@ public class EditorFormController {
     public void mnuItemFontSize_OnAction(ActionEvent actionEvent) {
         TextInputDialog textInputDialog = new TextInputDialog(String.valueOf(Preferences.userRoot().node("TextEditor-DEP7").getDouble("font size", 18)));
         textInputDialog.setHeaderText("Font Size");
-        textInputDialog.setWidth(50);
+        Stage dialogStage = (Stage) textInputDialog.getEditor().getScene().getWindow();
+        dialogStage.initStyle(StageStyle.TRANSPARENT);
+
         try {
             String fontSize = textInputDialog.showAndWait().get();
             Preferences.userRoot().node("TextEditor-DEP7").putDouble("font size", Double.parseDouble(textInputDialog.getEditor().getText()));
@@ -238,16 +262,16 @@ public class EditorFormController {
         }
     }
 
-    public void txtEditorDragDropped_OnAction(DragEvent dragEvent) {
-        if(dragEvent.getDragboard().hasFiles()){
-            File file = dragEvent.getDragboard().getFiles().get(0);
-            fileOpen(file);
+    public void txtEditorDragOver_OnAction(DragEvent dragEvent) {
+        if (dragEvent.getDragboard().hasFiles()) {
+            dragEvent.acceptTransferModes(TransferMode.ANY);
         }
     }
 
-    public void txtEditorDragOver_OnAction(DragEvent dragEvent) {
-        if(dragEvent.getDragboard().hasFiles()){
-            dragEvent.acceptTransferModes(TransferMode.ANY);
+    public void txtEditorDragDropped_OnAction(DragEvent dragEvent) {
+        if (dragEvent.getDragboard().hasFiles()) {
+            File file = dragEvent.getDragboard().getFiles().get(0);
+            fileOpen(file);
         }
     }
 }

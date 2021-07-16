@@ -1,11 +1,15 @@
+/*
+ * Copyright (c) 2021 - present Pethum Jeewantha. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ */
+
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
-import java.io.*;
-import java.util.Properties;
+import java.io.IOException;
 import java.util.prefs.Preferences;
 
 public class AppInitializer extends Application {
@@ -26,10 +30,10 @@ public class AppInitializer extends Application {
         double y = Preferences.userRoot().node("TextEditor-DEP7").getDouble("y", -1);
 
         if (width != -1 && height !=-1 && x!=-1 && y!= -1){
-                primaryStage.setWidth(width);
-                primaryStage.setHeight(height);
-                primaryStage.setX(x);
-                primaryStage.setY(y);
+            primaryStage.setWidth(width);
+            primaryStage.setHeight(height);
+            primaryStage.setX(x);
+            primaryStage.setY(y);
         }else {
             primaryStage.setMaximized(true);
         }
