@@ -1,4 +1,4 @@
-# Text Editor
+# ProEdit
 
 
 ### Contents of this file
@@ -6,12 +6,14 @@
 * User guide
 * License
 
+
 ---
 
 ### Introduction
 
-* A simple **Java FX Application** to study and demonstrate many Java and SE related stuff.
-* This can use to find text & replace them. User can add any text for it and save it.
+![](./image/ProEdit.png)
+
+* This repository is a simple **Java FX Application** to study and demonstrate many Java and SE related stuff.
 
 ---
 

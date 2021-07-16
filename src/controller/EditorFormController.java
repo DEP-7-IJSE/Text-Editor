@@ -5,6 +5,8 @@ import javafx.beans.value.ChangeListener;
 import javafx.event.ActionEvent;
 import javafx.print.PrinterJob;
 import javafx.scene.control.*;
+import javafx.scene.input.DragEvent;
+import javafx.scene.input.TransferMode;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
@@ -151,8 +153,11 @@ public class EditorFormController {
                 new FileChooser.ExtensionFilter("All Files", "*")
         );
         File file = fileChooser.showOpenDialog(txtEditor.getScene().getWindow());
-
         if (file == null) return;
+        fileOpen(file);
+    }
+
+    private void fileOpen(File file) {
 
         txtEditor.clear();
 
@@ -219,8 +224,9 @@ public class EditorFormController {
     }
 
     public void mnuItemFontSize_OnAction(ActionEvent actionEvent) {
-        TextInputDialog textInputDialog = new TextInputDialog(String.valueOf(font_size));
+        TextInputDialog textInputDialog = new TextInputDialog(String.valueOf(Preferences.userRoot().node("TextEditor-DEP7").getDouble("font size", 18)));
         textInputDialog.setHeaderText("Font Size");
+        textInputDialog.setWidth(50);
         try {
             String fontSize = textInputDialog.showAndWait().get();
             Preferences.userRoot().node("TextEditor-DEP7").putDouble("font size", Double.parseDouble(textInputDialog.getEditor().getText()));
@@ -229,6 +235,19 @@ public class EditorFormController {
             new Alert(Alert.AlertType.ERROR, "Invalid size", ButtonType.CLOSE).show();
         } catch (NoSuchElementException ignored) {
 
+        }
+    }
+
+    public void txtEditorDragDropped_OnAction(DragEvent dragEvent) {
+        if(dragEvent.getDragboard().hasFiles()){
+            File file = dragEvent.getDragboard().getFiles().get(0);
+            fileOpen(file);
+        }
+    }
+
+    public void txtEditorDragOver_OnAction(DragEvent dragEvent) {
+        if(dragEvent.getDragboard().hasFiles()){
+            dragEvent.acceptTransferModes(TransferMode.ANY);
         }
     }
 }

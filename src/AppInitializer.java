@@ -41,7 +41,7 @@ public class AppInitializer extends Application {
             Preferences.userRoot().node("TextEditor-DEP7").putDouble("y",primaryStage.getY());
         });
 
-        primaryStage.setTitle("Text Editor");
+        primaryStage.setTitle("ProEdit");
         primaryStage.show();
     }
 }
