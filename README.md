@@ -50,7 +50,7 @@
 * It can also read and write files.
 * After editing, the user can print it.
 
-### License
+## License
 
 Copyright &copy; 2021 - present Pethum Jeewantha. All rights reserved.
 
@@ -58,8 +58,7 @@ Licensed under the [MIT](LICENSE.txt) license.
 
 ## Contact
 
-Pethum Jeewantha - [Twitter](https://twitter.com/JeewanthaPethum?s=08) <br>
-pethumjeewantha4@gmail.com
+Pethum Jeewantha - [Twitter](https://twitter.com/JeewanthaPethum?s=08) - pethumjeewantha4@gmail.com
 
 [Project](https://https:github.com/DEP-7-IJSE/Text-Editor)
 

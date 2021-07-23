@@ -8,7 +8,9 @@ package controller;
 import javafx.animation.FadeTransition;
 import javafx.beans.value.ChangeListener;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXMLLoader;
 import javafx.print.PrinterJob;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.DragEvent;
 import javafx.scene.input.TransferMode;
@@ -273,6 +275,12 @@ public class EditorFormController {
             File file = dragEvent.getDragboard().getFiles().get(0);
             fileOpen(file);
         }
+    }
+
+    public void openAbout_OnAction(ActionEvent actionEvent) throws IOException {
+        Stage aboutStage = new Stage();
+        aboutStage.setScene(new Scene(FXMLLoader.load(this.getClass().getResource("/view/AboutForm.fxml"))));
+        aboutStage.show();
     }
 }
 
