@@ -3,7 +3,6 @@
 [![Contributors][contributors-shield]][contributors-url]
 [![Forks][forks-shield]][forks-url]
 [![Stargazers][stars-shield]][stars-url]
-[![Issues][issues-shield]][issues-url]
 [![MIT License][license-shield]][license-url]
 [![LinkedIn][linkedin-shield]][linkedin-url]
 
@@ -78,10 +77,6 @@ Pethum Jeewantha - [Twitter](https://twitter.com/JeewanthaPethum?s=08) - pethumj
 [stars-shield]: https://img.shields.io/github/stars/DEP-7-IJSE/Text-Editor.svg?style=for-the-badge
 
 [stars-url]: https://https://github.com/DEP-7-IJSE/Text-Editor/stargazers
-
-[issues-shield]: https://img.shields.io/github/issues/DEP-7-IJSE/Text-Editor.svg?style=for-the-badge
-
-[issues-url]: https://https://github.com/DEP-7-IJSE/Text-Editor/issues
 
 [license-shield]: https://img.shields.io/github/license/DEP-7-IJSE/Text-Editor.svg?style=for-the-badge
 
