@@ -37,7 +37,7 @@
 
 1. First clone the repository.
 
-   ``git clone https://github.com/DEP-7-IJSE/Text-Editor.git``
+   ``git clone https://github.com/Pethum-Jeewantha/text-editor``
 
 2. Once cloned, open the repository from the IntelliJ IDEA
 
@@ -59,28 +59,28 @@ Licensed under the [MIT](LICENSE.txt) license.
 
 Pethum Jeewantha - [Twitter](https://twitter.com/JeewanthaPethum?s=08) - pethumjeewantha4@gmail.com
 
-[Project](https://https:github.com/DEP-7-IJSE/Text-Editor)
+[Project](https://github.com/Pethum-Jeewantha/text-editor)
 
 ## Acknowledgements
 
 * [Img Shields](https://shields.io)
 * [Choose an Open Source License](https://choosealicense.com)
 
-[contributors-shield]: https://img.shields.io/github/contributors/DEP-7-IJSE/Text-Editor.svg?style=for-the-badge
+[contributors-shield]: https://img.shields.io/github/contributors/Pethum-Jeewantha/text-editor.svg?style=for-the-badge
 
-[contributors-url]: https://https://github.com/DEP-7-IJSE/Text-Editor/graphs/contributors
+[contributors-url]: https://github.com/Pethum-Jeewantha/text-editor/graphs/contributors
 
-[forks-shield]: https://img.shields.io/github/forks/DEP-7-IJSE/Text-Editor.svg?style=for-the-badge
+[forks-shield]: https://img.shields.io/github/forks/Pethum-Jeewantha/text-editor.svg?style=for-the-badge
 
-[forks-url]: https://github.com/DEP-7-IJSE/Text-Editor/network/members
+[forks-url]: https://github.com/Pethum-Jeewantha/text-editor/network/members
 
-[stars-shield]: https://img.shields.io/github/stars/DEP-7-IJSE/Text-Editor.svg?style=for-the-badge
+[stars-shield]: https://img.shields.io/github/stars/Pethum-Jeewantha/text-editor.svg?style=for-the-badge
 
-[stars-url]: https://https://github.com/DEP-7-IJSE/Text-Editor/stargazers
+[stars-url]: https://github.com/Pethum-Jeewantha/text-editor/stargazers
 
-[license-shield]: https://img.shields.io/github/license/DEP-7-IJSE/Text-Editor.svg?style=for-the-badge
+[license-shield]: https://img.shields.io/github/license/Pethum-Jeewantha/text-editor.svg?style=for-the-badge
 
-[license-url]: https://https://github.com/DEP-7-IJSE/Text-Editor/blob/master/LICENSE
+[license-url]: https://github.com/Pethum-Jeewantha/text-editor/blob/master/LICENSE
 
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 
